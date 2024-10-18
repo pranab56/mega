@@ -1,101 +1,70 @@
-import Image from "next/image";
+import Image from 'next/image';
+import React from 'react';
+import image1 from '@/images/devilgirl 2.png'
+import flower from '@/images/flower.png';
+import mega from '@/images/mega.png';
+import meetnow from '@/images/meetnow.png';
 
-export default function Home() {
+const page = () => {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <menu className='p-[40px]'>
+     <section className='flex justify-center'>
+     <section>  
+        <div>
+          <Image src={image1} width={198} height={260}/>
+         <div className='ml-[15px] mt-[-15px]'>
+         <button className='text-white bg-[#58C2FD] w-[158px] h-[35px] rounded' disabled>POST NOW</button>
+         </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <div className='text-center p-[15px]'>
+          <h3 className='text-[#810107] font-bold text-[14px] cursor-pointer'>Select location</h3>
+          <h3 className='text-[#FCBCE6] text-[13px] font-bold underline cursor-pointer'>change location</h3>  
+        </div>
+        <div>
+          <Image src={flower} width={170} height={120} alt='flower' />
+        </div>
+      </section>
+
+      <section className='flex flex-col gap-[48px]'>
+        <div className='flex flex-col gap-3'>
+          <Image src={mega} width={373} height={63} alt='mega'/>
+          <Image src={meetnow} width={373} height={50} alt='meetnow'/>
+          <h3 className='text-[#DCD1B1] text-[20px] font-bold text-center'>MegaPersonals is restricted to <br /> topersons 18 years of age or older*</h3>
+        </div>
+
+        <div className='flex flex-col gap-2'>
+          <button className='w-[370px] h-[49px] rounded bg-[#C75400] text-white text-[30px] font-bold'>W seek M</button>
+          <button className='w-[370px] h-[49px] rounded bg-[#FFA300] text-white text-[30px] font-bold'>M seek W</button>
+          <button className='w-[370px] h-[49px] rounded bg-[#E7C660] text-white text-[30px] font-bold'>M seek M</button>
+          <button className='w-[370px] h-[49px] rounded bg-[#857A30] text-white text-[30px] font-bold'>W seek W</button>
+          <button className='w-[370px] h-[49px] rounded bg-[#A6A3A3] text-white text-[30px] font-bold'>Trans</button>
+        </div>
+      </section>
+     </section>
+
+       <section className='flex flex-col gap-[30px] pt-6'>
+       <div className='text-center'>
+          <h3 className=' text-[#DCD1B1] text-[16px] italic'><span className='text-[#DCD1B1] text-[16px] font-semibold italic'>MegaPersonals</span> is a classifieds service</h3>
+          <h3 className='text-[#DCD1B1] text-[16px] italic'>for people wanting to <span className='text-[#21D42B] text-[16px] italic font-bold'>MEET NOW!</span></h3>
+        </div>
+
+
+        <div className='text-center flex flex-col gap-[26px]'>
+          <ul className='flex gap-2 justify-center text-[#0481C9] text-[13px] font-normal'>
+            <a href="/"><li className='cursor-pointer'>Home</li></a>
+            <li>|</li>
+            <li className='cursor-pointer'>Manage Posts</li>
+            <li>|</li>
+            <li className='cursor-pointer'>Contact Us</li>
+            <li>|</li>
+            <li className='cursor-pointer'>Policies & Terms</li>
+          </ul>
+          <h3 className='text-[#0481C9] text-[13px]'>Copyright @2024 MegaPersonals.eu</h3>
+        </div>
+       </section>
+
+    </menu>
   );
-}
+};
+
+export default page;
