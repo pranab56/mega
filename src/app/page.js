@@ -17,11 +17,12 @@ const page = () => {
   
   
   return (
-    <menu className='p-[40px]'>
-     <section className='flex justify-center '>
+    <menu className='p-[30px] w-[600px] mx-auto overflow-hidden'>
+     <section className='flex items-start justify-center overflow-x-hidden'>
+
      <section>  
         <div>
-          <Image src={image1} width={198} height={260} alt='...'/>
+          <Image src={image1} width={198} layout='responsive' objectFit='cover' height={260} alt='...'/>
          <div className='ml-[15px] mt-[-15px]'>
          <Link href={'/login'}><button className='text-white cursor-pointer bg-[#58C2FD] w-[158px] h-[35px] rounded' disabled>POST NOW</button></Link>
          </div>
@@ -54,6 +55,7 @@ const page = () => {
           <Link href={'/login'}><button className='w-[370px] h-[49px] rounded bg-[#A6A3A3] text-white text-[30px] font-bold'>Trans</button></Link>
         </div>
       </section>
+
      </section>
 
       

