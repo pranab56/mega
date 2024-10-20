@@ -48,11 +48,11 @@ const page = () => {
         </div>
 
         <div className='flex flex-col gap-4'>
-          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#C75400] text-white text-[30px] font-medium'>W seek M</button></Link>
-          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#FFA300] text-white text-[30px] font-medium'>M seek W</button></Link>
-          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#E7C660] text-white text-[30px] font-medium'>M seek M</button></Link>
-          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#857A30] text-white text-[30px] font-medium'>W seek W</button></Link>
-          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#A6A3A3] text-white text-[30px] font-medium'>Trans</button></Link>
+          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#C75400] text-white sm:text-[30px] text-[20px] font-medium'>W seek M</button></Link>
+          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#FFA300] text-white sm:text-[30px] text-[20px] font-medium'>M seek W</button></Link>
+          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#E7C660] text-white sm:text-[30px] text-[20px] font-medium'>M seek M</button></Link>
+          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#857A30] text-white sm:text-[30px] text-[20px] font-medium'>W seek W</button></Link>
+          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#A6A3A3] text-white sm:text-[30px] text-[20px] font-medium'>Trans</button></Link>
         </div>
       </section>
 
