@@ -17,14 +17,14 @@ const page = () => {
   
   
   return (
-    <menu className='p-[30px] w-[600px] mx-auto overflow-hidden'>
-     <section className='flex items-start justify-center overflow-x-hidden'>
+    <menu className='sm:p-[30px] sm:w-[600px] p-[20px]   sm:mx-auto '>
+     <section className='flex items-start justify-center gap-3'>
 
      <section>  
         <div>
-          <Image src={image1} width={198} layout='responsive' objectFit='cover' height={260} alt='...'/>
+          <Image src={image1} width={200} height={280} alt='...'/>
          <div className='ml-[15px] mt-[-15px]'>
-         <Link href={'/login'}><button className='text-white cursor-pointer bg-[#58C2FD] w-[158px] h-[35px] rounded' disabled>POST NOW</button></Link>
+         <Link href={'/login'}><button className='text-white cursor-pointer bg-[#58C2FD] w-[180px] h-[35px] rounded'>POST NOW</button></Link>
          </div>
         </div>
         <div className='text-center p-[15px]'>
@@ -40,19 +40,19 @@ const page = () => {
         </div>
       </section>
 
-      <section className='flex flex-col gap-[48px]'>
+      <section className='flex w-full flex-col sm:gap-[45px] gap-[30px]'>
         <div className='flex flex-col gap-3'>
           <Image src={mega} width={373} height={63} alt='mega'/>
           <Image src={meetnow} width={373} height={50} alt='meetnow'/>
-          <h3 className='text-[#DCD1B1] text-[20px] font-bold text-center'>MegaPersonals is restricted to <br /> topersons 18 years of age or older*</h3>
+          <h3 className='text-[#DCD1B1] sm:text-[20px] text-[14px] font-bold text-center'>MegaPersonals is restricted to <br /> topersons 18 years of age or older*</h3>
         </div>
 
-        <div className='flex flex-col gap-2'>
-          <Link href={'/login'}><button className='w-[370px] h-[49px] rounded bg-[#C75400] text-white text-[30px] font-bold'>W seek M</button></Link>
-          <Link href={'/login'}><button className='w-[370px] h-[49px] rounded bg-[#FFA300] text-white text-[30px] font-bold'>M seek W</button></Link>
-          <Link href={'/login'}><button className='w-[370px] h-[49px] rounded bg-[#E7C660] text-white text-[30px] font-bold'>M seek M</button></Link>
-          <Link href={'/login'}><button className='w-[370px] h-[49px] rounded bg-[#857A30] text-white text-[30px] font-bold'>W seek W</button></Link>
-          <Link href={'/login'}><button className='w-[370px] h-[49px] rounded bg-[#A6A3A3] text-white text-[30px] font-bold'>Trans</button></Link>
+        <div className='flex flex-col gap-4'>
+          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#C75400] text-white text-[30px] font-medium'>W seek M</button></Link>
+          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#FFA300] text-white text-[30px] font-medium'>M seek W</button></Link>
+          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#E7C660] text-white text-[30px] font-medium'>M seek M</button></Link>
+          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#857A30] text-white text-[30px] font-medium'>W seek W</button></Link>
+          <Link href={'/login'}><button className='sm:w-[370px] shadow-2xl w-full h-[49px] rounded bg-[#A6A3A3] text-white text-[30px] font-medium'>Trans</button></Link>
         </div>
       </section>
 
@@ -68,7 +68,7 @@ const page = () => {
 
 
         <div className='text-center flex flex-col gap-[26px]'>
-          <ul className='flex gap-2 justify-center text-[#0481C9] text-[13px] font-normal'>
+          <ul className='flex sm:gap-2 gap-[2px] justify-center text-[#0481C9] text-[13px] font-normal'>
             <a href="/"><li className='cursor-pointer'>Home</li></a>
             <li>|</li>
             <Link href={'/login'}><li className='cursor-pointer'>Manage Posts</li></Link>

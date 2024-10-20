@@ -18,7 +18,7 @@ const CountryModal = ({ setShowCountry, value }) => {
   const regions = {
     Canada: [
       'Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 
-      'Newfoundland and Labrador', 'Northwest Territories', 'Nova Scotia', 
+      'Newfoundland', 'Northwest Territories', 'Nova Scotia', 
       'Saskatchewan', 'Yukon', 'Ontario', 'Quebec'
     ],
     'United States': [
@@ -109,7 +109,7 @@ const CountryModal = ({ setShowCountry, value }) => {
                     <h3
                       key={region}
                       onClick={() => handleRegionClick(region)} // Pass the region
-                      className="bg-[#00CBFF]   hover:bg-[#00ccffb6] rounded-lg cursor-pointer text-white text-[18px] font-bold text-start px-[14px] py-[10px]"
+                      className="bg-[#00CBFF]   hover:bg-[#00ccffb6] rounded-lg cursor-pointer text-white text-[18px] font-bold text-start px-[14px] py-[7px]"
                     >
                      <Link href={'/login'}>
                      <span className="flex items-center justify-between">
