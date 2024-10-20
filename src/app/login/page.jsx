@@ -123,7 +123,7 @@ const page = () => {
             <h3 className='text-[#0000EE] text-[14px] font-normal'>FORGOT PASSWORD?</h3>
 
             <div className='text-center flex flex-col sm:gap-[26px] gap:[10px] '>
-          <ul className='flex sm:gap-2 gap-[1px] justify-center text-[#0481C9] text-[13px] font-normal'>
+          <ul className='flex sm:gap-2 gap-[1px] justify-center text-[#0481C9] sm:text-[13px] text-[8px] font-normal'>
             <a href="/"><li className='cursor-pointer'>Home</li></a>
             <li>|</li>
             <li className='cursor-pointer'>Manage Posts</li>
