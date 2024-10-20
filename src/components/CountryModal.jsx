@@ -77,7 +77,7 @@ const CountryModal = ({ setShowCountry, value }) => {
 
   return (
     <div
-      className="fixed inset-0 top-0 left-0 bg-[#00000080] z-50 flex py-2 items-center justify-center h-screen overflow-y-auto bg-center bg-no-repeat bg-cover outline-none min-w-screen animated fadeIn faster focus:outline-none"
+      className="fixed inset-0 top-0 left-0 bg-[#00000080] z-50 flex py-2 items-center justify-center sm:h-screen min-h-screen  overflow-y-scroll bg-center bg-no-repeat bg-cover outline-none min-w-screen animated fadeIn faster focus:outline-none"
       id="modal-id"
     >
       <div className="absolute inset-0 z-0 opacity-80"></div>
