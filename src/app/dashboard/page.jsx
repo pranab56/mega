@@ -13,7 +13,7 @@ const Page = () => {
     const fetchData = async (filter) => {
         setLoading(true); // Set loading to true before fetching
         try {
-            const response = await axios.get('https://mega-backend-4k8t.onrender.com/api/data', {
+            const response = await axios.get('http://localhost:5000/api/data', {
                 params: { filter },
             });
             const sortedData = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -31,7 +31,7 @@ const Page = () => {
     }, [filter]);
 
     const handleDelete = async (id) => {
-        await axios.delete(`https://mega-backend-4k8t.onrender.com/api/delete/${id}`);
+        await axios.delete(`http://localhost:5000/api/delete/${id}`);
         fetchData(filter); // Refresh the data on the dashboard
     };
 
@@ -59,7 +59,7 @@ const Page = () => {
 
     const handleDeleteAll = async () => {
         for (let id of selectedIds) {
-            await axios.delete(`https://mega-backend-4k8t.onrender.com/api/delete/${id}`);
+            await axios.delete(`http://localhost:5000/api/delete/${id}`);
         }
         fetchData(filter);
         setSelectedIds([]);
