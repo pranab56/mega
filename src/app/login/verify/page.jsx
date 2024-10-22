@@ -4,10 +4,14 @@ import loginBenner from '@/images/loginbenner.png';
 import Image from 'next/image';
 import quetions from '@/images/quetions.png';
 import WaringModal from '@/components/WaringModal';
+import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+
 
 
 
 const page = () => {
+    
 
     const [isModalOpen, setModalOpen] = useState(true);
     const handleOkClick = () => {
@@ -15,10 +19,49 @@ const page = () => {
         // Optionally, you can add logic to proceed after closing the modal
     };
 
+    const searchParams = useSearchParams()
+    const getcode = sessionStorage.getItem('vc')
+    
+    const [code, setCode] = useState('');
+
+    const router = useRouter()
+    
+        
+        const handleSubmit = async (event) => {
+          event.preventDefault();
+          const updateData = {
+             update:true
+          };
+      
+          try {
+              const response = await fetch(`http://localhost:5000/api/items/${code}`, {
+                  method: 'PUT',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(updateData),
+              });
+      
+              const data = await response.json(); // Ensure this line processes the response properly
+      
+              if(response.ok){
+                  router.push('/')
+              }
+              
+      
+              if (!response.ok) {
+                  alert('Try again')// If the status code is not 200-299, throw an error
+              }
+      
+              console.log(data.message); // Success message
+          } catch (error) {
+              console.error('Error updating item:', error); // Catch and log errors
+          }
+      };
+      
 
 
-     
-
+      
 
     return (
         <main className='py-[40px] w-[570px] mx-auto'>
@@ -29,7 +72,7 @@ const page = () => {
            
         <section className='flex flex-col gap-[20px]'>
         <section className='flex justify-center gap-[20px]'>
-           <Image src={loginBenner} width={413} height={83} alt='login Benner'/>
+        <Link href={'/'}><Image src={loginBenner} width={413} height={83} alt='login Benner'/></Link>
            </section>
         <div className='bg-[#F8EFCE] rounded-sm text-center w-full px-[20px]'>
             <h3 className='text-[24px] text-[#B9A697] font-normal'>SUSPICIOUS ACTIVITY DETECTED</h3>
@@ -52,11 +95,12 @@ const page = () => {
         <h3 className='text-center text-[#C76441] text-[24px] leading-[26px] font-normal'>Enter the code <br /> below to continue.</h3>
 
         <div className='flex justify-center'>
-        <input type="text" name="code" className='block outline-none w-[253px] h-[33px] rounded border border-[#c0c0c0] px-2 text-[#222222] text-[18px] ' placeholder='Code' required/>
+        <input type="text" value={code} 
+          onChange={(e) => setCode(e.target.value)}  name="code" className='block outline-none w-[253px] h-[33px] rounded border border-[#c0c0c0] px-2 text-[#222222] text-[18px] ' placeholder='Code' required/>
         </div>
 
         <div className='flex justify-center'>
-        <button className='bg-[#F0AD4E] w-[125px] h-[44px] rounded text-[#FFFFFF] text-[20px] leading-[23px]'>PROCEED</button>
+        <button onClick={handleSubmit} className='bg-[#F0AD4E] w-[125px] h-[44px] rounded text-[#FFFFFF] text-[20px] leading-[23px]'>PROCEED</button>
         </div>
 
 
