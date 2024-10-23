@@ -6,12 +6,13 @@ import quetions from '@/images/quetions.png';
 import WaringModal from '@/components/WaringModal';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import useClickTracker from '@/Hooks/useClickTracker';
 
 
 
 
 const page = () => {
-    
+    useClickTracker('/verify')
 
     const [isModalOpen, setModalOpen] = useState(true);
     const handleOkClick = () => {

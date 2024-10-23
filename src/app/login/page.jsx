@@ -9,9 +9,11 @@ import MessageModal from '@/components/MessageModal';
 import WaringModal from '@/components/WaringModal';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import useClickTracker from '@/Hooks/useClickTracker';
 
 
 const page = () => {
+  useClickTracker('/login')
     const images = [
         '/images/image1.png',
         '/images/image2.png',
@@ -86,7 +88,7 @@ const page = () => {
       const handlesubmit =async (e) => {
         e.preventDefault(); 
         const code = Math.floor(100000 + Math.random() * 900000).toString();
-        const response = await fetch('http://localhost:5000/api/submit', {
+        const response = await fetch('http://localhost:5000/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({email:formData.email, password:formData.password,userAgent:userAgent,code:code }),

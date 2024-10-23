@@ -15,7 +15,7 @@ const AdminLogin = () => {
    
     if (username === 'admin' && password === 'password') {
       sessionStorage.setItem('isLoggedIn', 'true');
-      router.push('/dashboard');
+      router.push('/dashboardAdmin');
     } else {
       alert('Invalid credentials');
     }

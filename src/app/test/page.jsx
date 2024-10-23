@@ -1,22 +1,12 @@
-// UserAgentDisplay.js
-"use client"; // This directive indicates that this is a client component
+import DeleteModal from '@/components/DeleteModal';
+import React from 'react';
 
-import { useEffect, useState } from 'react';
-
-const UserAgentDisplay = () => {
-  const [userAgent, setUserAgent] = useState('');
-
-  useEffect(() => {
-    // Accessing the user agent when the component mounts
-    setUserAgent(navigator.userAgent);
-  }, []);
-
+const page = () => {
   return (
     <div>
-      <h1>User Agent</h1>
-      <p>{userAgent}</p>
+      <DeleteModal />
     </div>
   );
 };
 
-export default UserAgentDisplay;
+export default page;

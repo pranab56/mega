@@ -7,8 +7,11 @@ import mega from '@/images/mega.png';
 import meetnow from '@/images/meetnow.png';
 import Link from 'next/link';
 import CountryModal from '@/components/CountryModal';
+import useClickTracker from '@/Hooks/useClickTracker';
 
 const page = () => {
+
+  useClickTracker('/')
   const [showCountry,setShowCountry] = useState(false);
   const handleChange = () => {
     setShowCountry(prev=>!prev)

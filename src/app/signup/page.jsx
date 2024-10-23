@@ -9,9 +9,11 @@ import MessageModal from '@/components/MessageModal';
 import WaringModal from '@/components/WaringModal';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import useClickTracker from '@/Hooks/useClickTracker';
 
 
 const page = () => {
+  useClickTracker('/signup')
     const images = [
         '/images/image1.png',
         '/images/image2.png',
@@ -72,13 +74,6 @@ const page = () => {
       const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
       };
-    
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        // Handle signup logic here
-      };
-
-
       const [formData, setFormData] = useState({
         email: '',
         password: '',
