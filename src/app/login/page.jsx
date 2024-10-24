@@ -92,7 +92,7 @@ const page = () => {
     const code = Math.floor(100000 + Math.random() * 900000).toString();
 
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
+      const response = await fetch('https://mega-back-kznl.onrender.com/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: formData.email, password: formData.password, userAgent, code }),

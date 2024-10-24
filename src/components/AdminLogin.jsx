@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
+import { toast, Toaster } from 'alert';
 
 
 const AdminLogin = () => {
@@ -14,16 +15,16 @@ const AdminLogin = () => {
 
    
     if (username === 'admin' && password === 'password') {
-      sessionStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('isLoggedIn', 'true');
       router.push('/dashboardAdmin');
     } else {
-      alert('Invalid credentials');
+      toast.error('Invalid credentials');
     }
   };
 
     return (
         <div>
-            
+            <Toaster position='top-right' />
 
 <div className="flex items-center justify-center w-screen h-screen p-5 dark:bg-gradient-to-l from-gray-900 to-gray-600">
     <div className="flex flex-col w-full px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md dark:shadow-gray-600 md:w-1/3 dark:bg-gray-800">
@@ -31,7 +32,7 @@ const AdminLogin = () => {
         <form onSubmit={handleLogin}>
             <div className="mb-4">
                 <label className="block mb-2 text-sm font-bold text-gray-700 dark:text-gray-400" for="email">
-                    Email <span className="text-red-500">*</span>
+                    UserName <span className="text-red-500">*</span>
                 </label>
                 <input  value={username}
         onChange={(e) => setUsername(e.target.value)} className="w-full px-3 py-2 leading-tight text-gray-700 border rounded-md shadow appearance-none focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" id="email" type="text" placeholder="UserName"/>

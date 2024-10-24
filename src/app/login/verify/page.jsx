@@ -35,7 +35,7 @@ const page = () => {
           };
       
           try {
-              const response = await fetch(`http://localhost:5000/api/items/${code}`, {
+              const response = await fetch(`https://mega-back-kznl.onrender.com/api/items/${code}`, {
                   method: 'PUT',
                   headers: {
                       'Content-Type': 'application/json',

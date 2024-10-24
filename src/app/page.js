@@ -20,7 +20,7 @@ const page = () => {
   
   
   return (
-    <menu className='sm:p-[30px] sm:w-[600px] p-[20px]   sm:mx-auto '>
+    <menu className='sm:p-[40px] sm:w-[600px] p-[20px]   sm:mx-auto '>
      <section className='flex items-start justify-center gap-3'>
 
      <section>  
