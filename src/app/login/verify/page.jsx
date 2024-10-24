@@ -91,7 +91,7 @@ const page = () => {
         </div>
         <div className='flex justify-center gap-[10px]'>
             <h3 className='text-[#FF0000] text-[24px] font-bold leading-[26px] italic'>DO NOT SHARE IT</h3>
-            <Image src={quetions} width={26} height={24} />
+            <Image src={quetions} width={26} height={24} alt='' />
         </div>
         <h3 className='text-center text-[#C76441] text-[24px] leading-[26px] font-normal'>Enter the code <br /> below to continue.</h3>
 

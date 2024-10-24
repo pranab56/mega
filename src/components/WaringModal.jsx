@@ -18,7 +18,7 @@ const WaringModal = ({ isOpen, onRequestClose, onOk }) => {
        <section className='flex flex-col gap-[20px] py-[5px] px-[15px]'>
        <section className='flex flex-col items-center justify-center text-center'>
             <div className='flex items-center gap-1'>
-                <Image src={warningImage} width={20} height={20} />
+                <Image src={warningImage} width={20} height={20} alt='..' />
                 <h3 className='text-[#222222] text-[16px] font-normal'>NEVER forward the email</h3>
             </div>
             <h3 className='text-[#222222] text-[16px] font-normal'>you received with the PIN code!</h3>

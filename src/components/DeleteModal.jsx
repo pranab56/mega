@@ -5,15 +5,15 @@ import Image from 'next/image';
 const DeleteModal = ({closeModal,selectedItemId,handleloginDelete,handlesignDelete,selectedProduct}) => {
     return (
         
-        <div className="min-w-screen h-screen animated fadeIn faster  fixed left-0  flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover"  id="modal-id">
-               <div className="absolute bg-black opacity-5 inset-0 z-0"></div>
+        <div className="fixed inset-0 left-0 z-50 flex items-center justify-center h-screen bg-center bg-no-repeat bg-cover outline-none min-w-screen animated fadeIn faster focus:outline-none"  id="modal-id">
+               <div className="absolute inset-0 z-0 bg-black opacity-5"></div>
             <div className="w-[463px] max-w-lg p-[20px] relative mx-auto my-auto rounded-xl shadow-lg  bg-white ">
               
               <div className="">
                 
                 <div className="text-center">
                         <div className='flex justify-center'>
-                        <Image src={confrimDel} height={100} width={100} />
+                        <Image src={confrimDel} height={100} width={100} alt='..' />
                         </div>
                                 <h2 className="text-[22px] text-black font-bold py-4 ">Are You Sure To Delate?</h2>
                                   
@@ -21,7 +21,7 @@ const DeleteModal = ({closeModal,selectedItemId,handleloginDelete,handlesignDele
                 
 {/* space-x-4 */}
 
-                <div className="  mt-2 text-center flex justify-between">
+                <div className="flex justify-between mt-2 text-center ">
                     <button onClick={closeModal} className=" bg-white w-[192px] h-[53px] text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded hover:shadow-lg hover:bg-gray-100">
                         Cancel
                     </button>
