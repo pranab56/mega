@@ -75,11 +75,14 @@ const CountryModal = ({ setShowCountry, value }) => {
 
   if (!value) return null; // Don't render modal if `value` is false
 
+
   return (
+    
     <div
-      className="fixed inset-0 top-0 left-0 bg-[#00000080] z-50 flex py-2 items-center justify-center sm:h-screen min-h-screen  overflow-y-scroll bg-center bg-no-repeat bg-cover outline-none min-w-screen animated fadeIn faster focus:outline-none"
+      className={`fixed inset-0 top-0 left-0 bg-[#00000080] z-50 flex py-2 items-center justify-center sm:h-screen min-h-screen ${selectedCountry === null || regions[selectedCountry].length < 11 ? "":"overflow-y-scroll"} bg-center bg-no-repeat bg-cover outline-none min-w-screen animated fadeIn faster focus:outline-none`}
       id="modal-id"
     >
+      
       <div className="absolute inset-0 z-0 opacity-80"></div>
       <div className="w-[310px] max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white">
         <div

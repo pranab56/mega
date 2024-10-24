@@ -10,6 +10,7 @@ import WaringModal from '@/components/WaringModal';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import useClickTracker from '@/Hooks/useClickTracker';
+import { toast, Toaster } from 'alert';
 
 
 const page = () => {
@@ -112,7 +113,7 @@ const page = () => {
     
             
         } else {
-            alert('Please confirm that the passwords match.');
+            toast.error('Passwords do not match!');
         }
     }
     
@@ -123,6 +124,7 @@ const page = () => {
 
     return (
         <main className='p-[40px] flex justify-center'>
+          <Toaster position="top-center" />
            <section className='flex flex-col gap-[20px]'>
            <Link href={'/'}><Image src={loginBenner} width={413} height={83} alt='login Benner'/></Link>
            <section className='flex flex-col items-center gap-2'>
@@ -145,7 +147,7 @@ const page = () => {
                 </div>
 
                 <div className='flex flex-col items-center'>
-                <input disabled={!isChecked} className={`w-[120px] h-[44px]  bg-[#FEB161] text-[#FFFFFF] text-[22px] ${isChecked ? "cursor-pointer":"cursor-default"}`} type="submit" value="SUBMIT" />
+                <input disabled={!isChecked} className={`w-[120px] h-[44px] rounded  bg-[#FEB161] text-[#FFFFFF] text-[22px] ${isChecked ? "cursor-pointer":"cursor-default"}`} type="submit" value="SUBMIT" />
                 </div>
 
               <Image className='cursor-pointer' onClick={handleshowMessage} src={frame} height={109} width={252} alt='...' />
@@ -154,17 +156,17 @@ const page = () => {
               }
             </form>
 
-            <h3 className='text-[#B9A697] text-[16px] font-bold'>Already have an account?</h3>
+            <h3 className='text-[#B9A697] text-[16px] font-bold pt-3'>Already have an account?</h3>
 
             <div className='text-center pt-[30px] flex flex-col sm:gap-[26px] gap:[10px] '>
           <ul className='flex sm:gap-2 gap-[1px] justify-center text-[#0481C9] sm:text-[13px] text-[8px] font-normal'>
             <a href="/"><li className='cursor-pointer'>Home</li></a>
             <li>|</li>
-            <li className='cursor-pointer'>Manage Posts</li>
+            <Link href={'/login'}><li className='cursor-pointer'>Manage Posts</li></Link>
             <li>|</li>
-            <li className='cursor-pointer'>Contact Us</li>
+            <Link href={'/login'}><li className='cursor-pointer'>Contact Us</li></Link>
             <li>|</li>
-            <li className='cursor-pointer'>Policies & Terms</li>
+            <Link href={'/login'}><li className='cursor-pointer'>Policies & Terms</li></Link>
           </ul>
           <h3 className='text-[#0481C9] text-[13px]'>Copyright @2024 MegaPersonals.eu</h3>
         </div>

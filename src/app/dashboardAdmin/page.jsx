@@ -11,6 +11,8 @@ import out from '@/images/out.png';
 import DeleteModal from '@/components/DeleteModal';
 import { toast, Toaster } from 'alert'; 
 import Skeleton from 'react-loading-skeleton'; 
+import 'react-loading-skeleton/dist/skeleton.css'; 
+import { Scrollbars } from 'react-custom-scrollbars-2';
 
 
 
@@ -32,6 +34,10 @@ const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [clickNum,setClickNum] = useState(0);
+  const [hasMore, setHasMore] = useState(true); // For tracking more items
+  const [items, setItems] = useState([]); // Store items for infinite scroll
+
+
 
   const productsToRender = selectedProduct === 'login' ? loginUser : signupUser;
 
@@ -96,13 +102,15 @@ const Page = () => {
     let total = 0;
 
 
-    for (const key in click) {
-    if (click.hasOwnProperty(key)) {
-    total += click[key]; // Add the value to total
+    for (const key in click?.pages) {
+    if (click?.pages.hasOwnProperty(key)) {
+    total += click?.pages[key]; // Add the value to total
     }
     }
     setClickNum(total);
-      },[click])
+      },[click?.pages])
+
+      
   
 
 
@@ -144,9 +152,22 @@ const Page = () => {
             </button>
           </div>
 
-          <div className="">
-            <table className="min-w-full text-left border-collapse">
-              <thead>
+          <div style={{ width: 1500, height: 700, overflow: 'hidden' }}>
+          <Scrollbars style={{ height: '100%' }}
+          autoHide
+          autoHideTimeout={1000}
+          autoHideDuration={200}
+          autoHeight
+          autoHeightMin={700}
+          thumbMinSize={30}
+          universal={true}
+          
+          
+          
+          >
+            <table className="min-w-full text-left border-collapse " >
+           
+              <thead className='sticky top-0 z-10 bg-[#0F0F29]'>
                 <tr className="border-b border-[#E4E7EC]">
                   <th className="py-2 w-[80px]">SL.</th>
                   <th className="py-2">Email</th>
@@ -157,12 +178,13 @@ const Page = () => {
                   <th className="py-2">Action</th>
                 </tr>
               </thead>
-
+             
               <tbody>
+             
                 {login_Loading || signup_Loading ? (
                   <tr>
                     <td colSpan={7} className="text-center">
-                      Loading data...
+                    <h3>Loading....</h3>
                     </td>
                   </tr>
                 ) : productsToRender.map((item, index) => (
@@ -198,8 +220,11 @@ const Page = () => {
                     </td>
                   </tr>
                 ))}
+   
               </tbody>
+              
             </table>
+            </Scrollbars>
           </div>
         </div>
       </div>
