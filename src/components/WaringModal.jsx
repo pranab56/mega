@@ -12,7 +12,7 @@ const WaringModal = ({ isOpen, onRequestClose, onOk }) => {
 
         <section className='border-[1px] flex justify-between items-center border-[#979797] p-1 rounded-md bg-custom-gradient'>
             <h3 className='text-[#222222] text-[16px] italic font-bold pl-3'>Warning</h3>
-            <div class="w-[20px] h-[21px] rounded-[2px] border-[1px] border-[#979797] bg-[#EFEFEF]"></div>
+            <div className="w-[20px] h-[21px] rounded-[2px] border-[1px] border-[#979797] bg-[#EFEFEF]"></div>
         </section>
 
        <section className='flex flex-col gap-[20px] py-[5px] px-[15px]'>

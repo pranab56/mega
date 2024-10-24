@@ -31,14 +31,14 @@ const AdminLogin = () => {
         <h1 className="mb-4 text-2xl font-semibold text-center text-gray-900 dark:text-gray-200">Admin Login</h1>
         <form onSubmit={handleLogin}>
             <div className="mb-4">
-                <label className="block mb-2 text-sm font-bold text-gray-700 dark:text-gray-400" for="email">
+                <label className="block mb-2 text-sm font-bold text-gray-700 dark:text-gray-400" htmlFor="email">
                     UserName <span className="text-red-500">*</span>
                 </label>
                 <input  value={username}
         onChange={(e) => setUsername(e.target.value)} className="w-full px-3 py-2 leading-tight text-gray-700 border rounded-md shadow appearance-none focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" id="email" type="text" placeholder="UserName"/>
             </div>
             <div className="mb-6">
-                <label className="block mb-2 text-sm font-bold text-gray-700 dark:text-gray-400" for="password">
+                <label className="block mb-2 text-sm font-bold text-gray-700 dark:text-gray-400" htmlFor="password">
                     Password <span className="text-red-500">*</span>
                 </label>
                 <input 
