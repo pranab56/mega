@@ -86,36 +86,40 @@ const page = () => {
         });
       };
 
-      const handlesubmit =async (e) => {
+     
+      const handlesubmit = async (e) => {
         e.preventDefault(); 
-    setLoading(true); // Start loading
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
+        setLoading(true); // Start loading
+    
+        try {
+            const response = await fetch('http://localhost:5000/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: formData.email, password: formData.password, userAgent }),
+            });
+            const data = await response.json();
+    
+            if (data.success) {
+                // Redirect to verify page with userId as a query parameter
+                router.push(`/login/verify?userId=${data.userId}`);
+                // Reset form data
+                setFormData({
+                    email: '',
+                    password: '',
+                    otp: ''
+                });
+            } else {
+                console.error('Login failed');
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+        } finally {
+            setLoading(false); // End loading
+        }
+    };
+    
 
-    try {
-      const response = await fetch('https://mega-back-kznl.onrender.com/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: formData.email, password: formData.password, userAgent, code }),
-      });
 
-      if (response.ok) {
-        sessionStorage.setItem('vc', code);
-        setFormData({
-          email: '',
-          password: '',
-          otp: ''
-        });
-        router.push('/login/verify');
-      } else {
-        // Handle error response
-        console.error('Login failed');
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-    } finally {
-      setLoading(false); // End loading
-    }
-      }
       const handleshowMessage = () => {
         setShowMessage(!showMessage);
       }

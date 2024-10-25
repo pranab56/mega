@@ -105,7 +105,7 @@ const page = () => {
     
         if (formData.password === formData.confrim) {
             
-                const response = await fetch('https://mega-back-kznl.onrender.com/api/signup', {
+                const response = await fetch('http://localhost:5000/api/signup', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: formData.email, password: formData.password, confrim: formData.confrim, userAgent: userAgent }),

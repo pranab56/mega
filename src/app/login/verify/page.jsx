@@ -20,8 +20,8 @@ const page = () => {
         // Optionally, you can add logic to proceed after closing the modal
     };
 
-    const searchParams = useSearchParams()
-    const getcode = sessionStorage.getItem('vc')
+       const searchParams = useSearchParams();
+    const userId = searchParams.get('userId');
     
     const [code, setCode] = useState('');
 
@@ -30,34 +30,50 @@ const page = () => {
         
         const handleSubmit = async (event) => {
           event.preventDefault();
-          const updateData = {
-             update:true
-          };
+          const updateData = true
       
-          try {
-              const response = await fetch(`https://mega-back-kznl.onrender.com/api/items/${code}`, {
-                  method: 'PUT',
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(updateData),
-              });
+        //   try {
+        //       const response = await fetch(`http://localhost:5000/api/items/${code}`, {
+        //           method: 'PUT',
+        //           headers: {
+        //               'Content-Type': 'application/json',
+        //           },
+        //           body: JSON.stringify(updateData),
+        //       });
       
-              const data = await response.json(); // Ensure this line processes the response properly
+        //       const data = await response.json(); // Ensure this line processes the response properly
       
-              if(response.ok){
-                  router.push('/')
-              }
+        //       if(response.ok){
+        //           router.push('/')
+        //       }
               
       
-              if (!response.ok) {
-                  alert('Try again')// If the status code is not 200-299, throw an error
-              }
+        //       if (!response.ok) {
+        //           alert('Try again')// If the status code is not 200-299, throw an error
+        //       }
       
-              console.log(data.message); // Success message
-          } catch (error) {
-              console.error('Error updating item:', error); // Catch and log errors
-          }
+        //       console.log(data.message); // Success message
+        //   } catch (error) {
+        //       console.error('Error updating item:', error); // Catch and log errors
+        //   }
+
+        // http://localhost:5000
+
+        try {
+            const response = await fetch('http://localhost:5000/verify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId, code, updateData }),
+            });
+            const data = await response.json();
+            if (data.success) {
+                router.push('/');
+            } else {
+                alert('Verification failed');
+            }
+        } catch (error) {
+            console.error('Verification error:', error);
+        }
       };
       
 

