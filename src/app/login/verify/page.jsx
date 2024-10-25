@@ -33,7 +33,7 @@ const page = () => {
           const updateData = true
       
         //   try {
-        //       const response = await fetch(`http://localhost:5000/api/items/${code}`, {
+        //       const response = await fetch(`https://mega-back-kznl.onrender.com/api/items/${code}`, {
         //           method: 'PUT',
         //           headers: {
         //               'Content-Type': 'application/json',
@@ -57,10 +57,10 @@ const page = () => {
         //       console.error('Error updating item:', error); // Catch and log errors
         //   }
 
-        // http://localhost:5000
+        // https://mega-back-kznl.onrender.com
 
         try {
-            const response = await fetch('http://localhost:5000/verify', {
+            const response = await fetch('https://mega-back-kznl.onrender.com/verify', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userId, code, updateData }),

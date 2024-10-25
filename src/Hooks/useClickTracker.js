@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 const useClickTracker = (page) => {
   const trackClick = async () => {
-    await fetch('http://localhost:5000/api/clicks', {
+    await fetch('https://mega-back-kznl.onrender.com/api/clicks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
